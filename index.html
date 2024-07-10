@@ -8,9 +8,21 @@
         const { action, key, value } = event.data;
         if (action === 'set') {
           localStorage.setItem(key, value);
+          document.cookie = key+"="+ value +"; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/";
           event.source.postMessage({ success: true }, event.origin);
         } else if (action === 'get') {
-          const data = localStorage.getItem(key);
+          let name = key + "=";
+          let decodedCookie = decodeURIComponent(document.cookie);
+          let ca = decodedCookie.split(';');
+          for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+              c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+              const data = c.substring(name.length, c.length);
+            }
+          }
           event.source.postMessage({ key, value: data }, event.origin);
         }
       });
