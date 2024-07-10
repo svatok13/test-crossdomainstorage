@@ -8,7 +8,7 @@
         const { action, key, value } = event.data;
         if (action === 'set') {
           localStorage.setItem(key, value);
-          document.cookie = key+"="+ value +"; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/";
+          document.cookie = key+"="+ value +"; expires=Thu, 18 Dec 2024 12:00:00 UTC; path=/;SameSite=None;Secure";
           event.source.postMessage({ success: true }, event.origin);
         } else if (action === 'get') {
           let name = key + "=";
