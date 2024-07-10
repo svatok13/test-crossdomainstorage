@@ -4,6 +4,7 @@
     <title>Central Storage</title>
     <script>
       window.addEventListener('message', function(event) {    
+        console.log(event);
         const { action, key, value } = event.data;
         if (action === 'set') {
           localStorage.setItem(key, value);
