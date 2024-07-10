@@ -1,0 +1,21 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Storage</title>
+    <script>
+      window.addEventListener('message', function(event) {    
+        const { action, key, value } = event.data;
+        if (action === 'set') {
+          localStorage.setItem(key, value);
+          event.source.postMessage({ success: true }, event.origin);
+        } else if (action === 'get') {
+          const data = localStorage.getItem(key);
+          event.source.postMessage({ key, value: data }, event.origin);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Central Storage</h1>
+  </body>
+  </html>
